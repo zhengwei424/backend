@@ -98,7 +98,7 @@ func InitRouter() {
 	}
 
 	// 设置config资源路由组
-	config := r.Group("globalConfig")
+	config := r.Group("config")
 	{
 		config.GET("/configMaps", myConfigMap.GetConfigMapsInfo)
 		config.GET("/secrets", mySecret.GetSecretsInfo)
