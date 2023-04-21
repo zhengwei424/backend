@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-func GetPersistentVolume(c *gin.Context) {
+func GetStorageClass(c *gin.Context) {
 	storageClass := c.Query("storageClass")
 	storageClassInfo := new(v1.StorageClass)
 
@@ -32,7 +32,7 @@ func GetPersistentVolume(c *gin.Context) {
 	}
 }
 
-func UpdatePersistentVolume(c *gin.Context) {
+func UpdateStorageClass(c *gin.Context) {
 	storageClassInfo := new(v1.StorageClass)
 	if err := c.BindJSON(storageClassInfo); err == nil {
 		fmt.Println(*storageClassInfo)
@@ -55,7 +55,7 @@ func UpdatePersistentVolume(c *gin.Context) {
 	}
 }
 
-func DeletePersistentVolume(c *gin.Context) {
+func DeleteStorageClass(c *gin.Context) {
 	storageClass := c.Query("storageClass")
 
 	client := globalConfig.MyClient.Client

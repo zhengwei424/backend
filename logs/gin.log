@@ -25,6 +25,9 @@
 [GIN-debug] POST   /cluster/namespace/update --> backend/Controllers/k8s/namespace.UpdateNamespace (6 handlers)
 [GIN-debug] GET    /cluster/namespace/get    --> backend/Controllers/k8s/namespace.GetNamespace (6 handlers)
 [GIN-debug] GET    /cluster/nodes            --> backend/Controllers/k8s/node.GetNodesInfo (6 handlers)
+[GIN-debug] POST   /cluster/node/delete      --> backend/Controllers/k8s/node.DeleteNode (6 handlers)
+[GIN-debug] POST   /cluster/node/update      --> backend/Controllers/k8s/node.UpdateNode (6 handlers)
+[GIN-debug] GET    /cluster/node/get         --> backend/Controllers/k8s/node.GetNode (6 handlers)
 [GIN-debug] GET    /config/configMaps        --> backend/Controllers/k8s/config/configMap.GetConfigMapsInfo (6 handlers)
 [GIN-debug] POST   /config/configMap/delete  --> backend/Controllers/k8s/config/configMap.DeleteConfigMap (6 handlers)
 [GIN-debug] POST   /config/configMap/update  --> backend/Controllers/k8s/config/configMap.UpdateConfigMap (6 handlers)
@@ -36,6 +39,9 @@
 [GIN-debug] POST   /other/resourcesCreate    --> backend/Controllers/k8s/other/resourcesCreat.ResourcesCreate (6 handlers)
 [GIN-debug] GET    /other/template           --> backend/Controllers/k8s/other/resourceTemplate.GetResourceTemplate (6 handlers)
 [GIN-debug] GET    /other/events             --> backend/Controllers/k8s/other/event.GetEventsInfo (6 handlers)
+[GIN-debug] POST   /other/event/delete       --> backend/Controllers/k8s/other/event.DeleteEvent (6 handlers)
+[GIN-debug] POST   /other/event/update       --> backend/Controllers/k8s/other/event.UpdateEvent (6 handlers)
+[GIN-debug] GET    /other/event/get          --> backend/Controllers/k8s/other/event.GetEvent (6 handlers)
 [GIN-debug] GET    /rbac/clusterRoles        --> backend/Controllers/k8s/RBAC/clusterRole.GetClusterRolesInfo (6 handlers)
 [GIN-debug] POST   /rbac/clusterRole/delete  --> backend/Controllers/k8s/RBAC/clusterRole.DeleteClusterRole (6 handlers)
 [GIN-debug] POST   /rbac/clusterRole/update  --> backend/Controllers/k8s/RBAC/clusterRole.UpdateClusterRole (6 handlers)
@@ -65,9 +71,9 @@
 [GIN-debug] POST   /storage/persistentVolumeClaim/update --> backend/Controllers/k8s/storage/persistentVolumeClaim.UpdatePersistentVolumeClaim (6 handlers)
 [GIN-debug] GET    /storage/persistentVolumeClaim/get --> backend/Controllers/k8s/storage/persistentVolumeClaim.GetPersistentVolumeClaim (6 handlers)
 [GIN-debug] GET    /storage/storageClasses   --> backend/Controllers/k8s/storage/storageClass.GetStorageClassesInfo (6 handlers)
-[GIN-debug] POST   /storage/storageClass/delete --> backend/Controllers/k8s/storage/storageClass.DeletePersistentVolume (6 handlers)
-[GIN-debug] POST   /storage/storageClass/update --> backend/Controllers/k8s/storage/storageClass.UpdatePersistentVolume (6 handlers)
-[GIN-debug] GET    /storage/storageClass/get --> backend/Controllers/k8s/storage/storageClass.GetPersistentVolume (6 handlers)
+[GIN-debug] POST   /storage/storageClass/delete --> backend/Controllers/k8s/storage/storageClass.DeleteStorageClass (6 handlers)
+[GIN-debug] POST   /storage/storageClass/update --> backend/Controllers/k8s/storage/storageClass.UpdateStorageClass (6 handlers)
+[GIN-debug] GET    /storage/storageClass/get --> backend/Controllers/k8s/storage/storageClass.GetStorageClass (6 handlers)
 [GIN-debug] GET    /svc/ingresses            --> backend/Controllers/k8s/SVC/ingress.GetIngressesInfo (6 handlers)
 [GIN-debug] POST   /svc/ingress/delete       --> backend/Controllers/k8s/SVC/ingress.DeleteIngress (6 handlers)
 [GIN-debug] POST   /svc/ingress/update       --> backend/Controllers/k8s/SVC/ingress.UpdateIngress (6 handlers)
@@ -122,3 +128,70 @@
 [GIN-debug] Listening and serving HTTPS on :9090
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN] 2023/04/21 - 16:42:01 | 204 |       4.415µs |    192.168.10.1 | OPTIONS  "/cluster/namespaces"
+[GIN] 2023/04/21 - 16:42:01 | 204 |       4.782µs |    192.168.10.1 | OPTIONS  "/workload/pods?namespace=default"
+[GIN] 2023/04/21 - 16:42:01 | 500 |    3.841898ms |    192.168.10.1 | GET      "/cluster/namespaces"
+[GIN] 2023/04/21 - 16:42:01 | 500 |     2.40495ms |    192.168.10.1 | GET      "/workload/pods?namespace=default"
+[GIN] 2023/04/21 - 16:52:23 | 204 |       5.557µs |    192.168.10.1 | OPTIONS  "/workload/pods?namespace=default"
+[GIN] 2023/04/21 - 16:52:23 | 204 |       3.672µs |    192.168.10.1 | OPTIONS  "/cluster/namespaces"
+[GIN] 2023/04/21 - 16:52:23 | 500 |    6.333764ms |    192.168.10.1 | GET      "/workload/pods?namespace=default"
+[GIN] 2023/04/21 - 16:52:23 | 500 |    5.263156ms |    192.168.10.1 | GET      "/cluster/namespaces"
+[GIN] 2023/04/21 - 16:56:57 | 204 |      20.904µs |    192.168.10.1 | OPTIONS  "/other/events?namespace=default"
+[GIN] 2023/04/21 - 16:56:57 | 500 |    1.512279ms |    192.168.10.1 | GET      "/other/events?namespace=default"
+[GIN] 2023/04/21 - 16:57:17 | 204 |       7.384µs |    192.168.10.1 | OPTIONS  "/clusterManagement/clusters"
+192.168.10.1 - [Fri, 21 Apr 2023 16:57:17 CST] GET /clusterManagement/clusters HTTP/2.0 200 2.350416ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:57:17 | 200 |    2.426411ms |    192.168.10.1 | GET      "/clusterManagement/clusters"
+[GIN] 2023/04/21 - 16:57:18 | 204 |         3.8µs |    192.168.10.1 | OPTIONS  "/clusterManagement/connectCluster"
+192.168.10.1 - [Fri, 21 Apr 2023 16:57:18 CST] POST /clusterManagement/connectCluster HTTP/2.0 200 2.03087ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:57:18 | 200 |    2.145123ms |    192.168.10.1 | POST     "/clusterManagement/connectCluster"
+[GIN] 2023/04/21 - 16:57:18 | 204 |       4.949µs |    192.168.10.1 | OPTIONS  "/cluster/namespaces"
+192.168.10.1 - [Fri, 21 Apr 2023 16:57:18 CST] GET /cluster/namespaces HTTP/2.0 200 100.927899ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:57:18 | 200 |  101.345579ms |    192.168.10.1 | GET      "/cluster/namespaces"
+[GIN] 2023/04/21 - 16:57:22 | 204 |       4.821µs |    192.168.10.1 | OPTIONS  "/other/events?namespace=default"
+192.168.10.1 - [Fri, 21 Apr 2023 16:57:22 CST] GET /other/events?namespace=default HTTP/2.0 200 72.851147ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:57:22 | 200 |   72.913432ms |    192.168.10.1 | GET      "/other/events?namespace=default"
+[GIN] 2023/04/21 - 16:58:58 | 204 |       5.508µs |    192.168.10.1 | OPTIONS  "/other/events?namespace=default"
+[GIN] 2023/04/21 - 16:58:58 | 204 |       3.935µs |    192.168.10.1 | OPTIONS  "/cluster/namespaces"
+192.168.10.1 - [Fri, 21 Apr 2023 16:58:59 CST] GET /other/events?namespace=default HTTP/2.0 200 129.864922ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:58:59 | 200 |  129.981144ms |    192.168.10.1 | GET      "/other/events?namespace=default"
+192.168.10.1 - [Fri, 21 Apr 2023 16:58:59 CST] GET /cluster/namespaces HTTP/2.0 200 131.364775ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:58:59 | 200 |  131.465121ms |    192.168.10.1 | GET      "/cluster/namespaces"
+[GIN] 2023/04/21 - 16:59:05 | 204 |       4.485µs |    192.168.10.1 | OPTIONS  "/svc/endpoints?namespace=default"
+192.168.10.1 - [Fri, 21 Apr 2023 16:59:05 CST] GET /svc/endpoints?namespace=default HTTP/2.0 200 73.199092ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:59:05 | 200 |   73.266819ms |    192.168.10.1 | GET      "/svc/endpoints?namespace=default"
+[GIN] 2023/04/21 - 16:59:08 | 204 |       4.731µs |    192.168.10.1 | OPTIONS  "/svc/endpoints?namespace=commander-fcp"
+192.168.10.1 - [Fri, 21 Apr 2023 16:59:08 CST] GET /svc/endpoints?namespace=commander-fcp HTTP/2.0 200 65.511659ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:59:08 | 200 |   65.589856ms |    192.168.10.1 | GET      "/svc/endpoints?namespace=commander-fcp"
+[GIN] 2023/04/21 - 16:59:12 | 204 |      29.178µs |    192.168.10.1 | OPTIONS  "/svc/endpoints?namespace=asmnspace-fcp"
+192.168.10.1 - [Fri, 21 Apr 2023 16:59:12 CST] GET /svc/endpoints?namespace=asmnspace-fcp HTTP/2.0 200 64.270233ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:59:12 | 200 |   64.437751ms |    192.168.10.1 | GET      "/svc/endpoints?namespace=asmnspace-fcp"
+[GIN] 2023/04/21 - 16:59:13 | 204 |       4.599µs |    192.168.10.1 | OPTIONS  "/svc/endpoints?namespace=apollons-fcp"
+192.168.10.1 - [Fri, 21 Apr 2023 16:59:13 CST] GET /svc/endpoints?namespace=apollons-fcp HTTP/2.0 200 10.573641ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:59:13 | 200 |   10.628869ms |    192.168.10.1 | GET      "/svc/endpoints?namespace=apollons-fcp"
+[GIN] 2023/04/21 - 16:59:18 | 204 |       6.332µs |    192.168.10.1 | OPTIONS  "/svc/endpoint/get?namespace=apollons-fcp&endpoint=apollo-svc"
+192.168.10.1 - [Fri, 21 Apr 2023 16:59:18 CST] GET /svc/endpoint/get?namespace=apollons-fcp&endpoint=apollo-svc HTTP/2.0 200 66.224846ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:59:18 | 200 |   66.587533ms |    192.168.10.1 | GET      "/svc/endpoint/get?namespace=apollons-fcp&endpoint=apollo-svc"
+[GIN] 2023/04/21 - 16:59:26 | 204 |       4.126µs |    192.168.10.1 | OPTIONS  "/svc/endpoint/get?namespace=apollons-fcp&endpoint=apollo-svc"
+192.168.10.1 - [Fri, 21 Apr 2023 16:59:26 CST] GET /svc/endpoint/get?namespace=apollons-fcp&endpoint=apollo-svc HTTP/2.0 200 60.649805ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 16:59:26 | 200 |   60.884949ms |    192.168.10.1 | GET      "/svc/endpoint/get?namespace=apollons-fcp&endpoint=apollo-svc"
+[GIN] 2023/04/21 - 17:01:28 | 204 |       5.195µs |    192.168.10.1 | OPTIONS  "/svc/endpoints?namespace=default"
+[GIN] 2023/04/21 - 17:01:28 | 204 |        6.14µs |    192.168.10.1 | OPTIONS  "/cluster/namespaces"
+192.168.10.1 - [Fri, 21 Apr 2023 17:01:28 CST] GET /svc/endpoints?namespace=default HTTP/2.0 200 48.892974ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 17:01:28 | 200 |   49.159377ms |    192.168.10.1 | GET      "/svc/endpoints?namespace=default"
+192.168.10.1 - [Fri, 21 Apr 2023 17:01:28 CST] GET /cluster/namespaces HTTP/2.0 200 54.284998ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 17:01:28 | 200 |   54.347365ms |    192.168.10.1 | GET      "/cluster/namespaces"
+[GIN] 2023/04/21 - 17:01:30 | 204 |       6.013µs |    192.168.10.1 | OPTIONS  "/other/events?namespace=default"
+192.168.10.1 - [Fri, 21 Apr 2023 17:01:30 CST] GET /other/events?namespace=default HTTP/2.0 200 53.690103ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 17:01:30 | 200 |   53.750609ms |    192.168.10.1 | GET      "/other/events?namespace=default"
+[GIN] 2023/04/21 - 17:01:33 | 204 |       5.804µs |    192.168.10.1 | OPTIONS  "/svc/endpoints?namespace=default"
+192.168.10.1 - [Fri, 21 Apr 2023 17:01:33 CST] GET /svc/endpoints?namespace=default HTTP/2.0 200 60.958685ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 17:01:33 | 200 |   61.090874ms |    192.168.10.1 | GET      "/svc/endpoints?namespace=default"
+[GIN] 2023/04/21 - 17:01:36 | 204 |       5.206µs |    192.168.10.1 | OPTIONS  "/svc/services?namespace=default"
+192.168.10.1 - [Fri, 21 Apr 2023 17:01:36 CST] GET /svc/services?namespace=default HTTP/2.0 200 63.726268ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 17:01:36 | 200 |    64.07668ms |    192.168.10.1 | GET      "/svc/services?namespace=default"
+[GIN] 2023/04/21 - 17:01:37 | 204 |       5.041µs |    192.168.10.1 | OPTIONS  "/svc/endpoints?namespace=default"
+192.168.10.1 - [Fri, 21 Apr 2023 17:01:37 CST] GET /svc/endpoints?namespace=default HTTP/2.0 200 63.699782ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 17:01:37 | 200 |   64.089274ms |    192.168.10.1 | GET      "/svc/endpoints?namespace=default"
+[GIN] 2023/04/21 - 17:02:05 | 204 |       6.783µs |    192.168.10.1 | OPTIONS  "/svc/ingresses?namespace=default"
+192.168.10.1 - [Fri, 21 Apr 2023 17:02:05 CST] GET /svc/ingresses?namespace=default HTTP/2.0 200 55.090979ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" 
+[GIN] 2023/04/21 - 17:02:05 | 200 |   55.163306ms |    192.168.10.1 | GET      "/svc/ingresses?namespace=default"

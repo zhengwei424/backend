@@ -1,0 +1,320 @@
+
+
+[31m2023/04/21 16:42:01 [Recovery] 2023/04/21 - 16:42:01 panic recovered:
+GET /cluster/namespaces HTTP/2.0
+Host: 192.168.10.168:9090
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,zh-TW;q=0.8
+Cache-Control: no-cache
+Origin: https://192.168.10.168:9528
+Pragma: no-cache
+Referer: https://192.168.10.168:9528/
+Sec-Ch-Ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-site
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjEsIlVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE2ODI1NTY0ODUsImlhdCI6MTY4MTk1MTY4NSwiaXNzIjoiYWRtaW4iLCJzdWIiOiJ0b2tlbiJ9.zIUeRWYfOUGvaRmRzpP8l54U_N16aBt3leYLKplvtk0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+/home/zhengwei/go/go1.17.3/src/runtime/panic.go:221 (0x44ace6)
+	panicmem: panic(memoryError)
+/home/zhengwei/go/go1.17.3/src/runtime/signal_unix.go:735 (0x44acb6)
+	sigpanic: panicmem()
+/home/zhengwei/goprojects/backend/Controllers/k8s/namespace/namespace.go:18 (0x1353413)
+	GetNamespacesInfo: namespaces, err := client.CoreV1().Namespaces().List(opts)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x139372f)
+	(*Context).Next: c.handlers[c.index](c)
+/home/zhengwei/goprojects/backend/Middlewares/jwt.go:37 (0x13935f7)
+	AuthMiddleware.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904046)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x904029)
+	LoggerWithConfig.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x1393337)
+	(*Context).Next: c.handlers[c.index](c)
+/home/zhengwei/goprojects/backend/Middlewares/cors.go:28 (0x1393323)
+	Cors.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904de1)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x904dcc)
+	CustomRecoveryWithWriter.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904046)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x904029)
+	LoggerWithConfig.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x903590)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x9031f8)
+	(*Engine).handleHTTPRequest: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x902d31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/zhengwei/go/go1.17.3/src/net/http/server.go:2878 (0x6acffa)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/zhengwei/go/go1.17.3/src/net/http/server.go:3479 (0x6aee04)
+	initALPNRequest.ServeHTTP: h.h.ServeHTTP(rw, req)
+/home/zhengwei/go/go1.17.3/src/net/http/h2_bundle.go:5841 (0x682b37)
+	(*http2serverConn).runHandler: handler(rw, req)
+/home/zhengwei/go/go1.17.3/src/runtime/asm_amd64.s:1581 (0x465560)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2023/04/21 16:42:01 [Recovery] 2023/04/21 - 16:42:01 panic recovered:
+GET /workload/pods?namespace=default HTTP/2.0
+Host: 192.168.10.168:9090
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,zh-TW;q=0.8
+Cache-Control: no-cache
+Origin: https://192.168.10.168:9528
+Pragma: no-cache
+Referer: https://192.168.10.168:9528/
+Sec-Ch-Ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-site
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjEsIlVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE2ODI1NTY0ODUsImlhdCI6MTY4MTk1MTY4NSwiaXNzIjoiYWRtaW4iLCJzdWIiOiJ0b2tlbiJ9.zIUeRWYfOUGvaRmRzpP8l54U_N16aBt3leYLKplvtk0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+/home/zhengwei/go/go1.17.3/src/runtime/panic.go:221 (0x44ace6)
+	panicmem: panic(memoryError)
+/home/zhengwei/go/go1.17.3/src/runtime/signal_unix.go:735 (0x44acb6)
+	sigpanic: panicmem()
+/home/zhengwei/goprojects/backend/Controllers/k8s/workload/pod/pod.go:31 (0x138845f)
+	GetPodsInfo: pods, err := client.CoreV1().Pods(ns).List(opts)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x139372f)
+	(*Context).Next: c.handlers[c.index](c)
+/home/zhengwei/goprojects/backend/Middlewares/jwt.go:37 (0x13935f7)
+	AuthMiddleware.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904046)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x904029)
+	LoggerWithConfig.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x1393337)
+	(*Context).Next: c.handlers[c.index](c)
+/home/zhengwei/goprojects/backend/Middlewares/cors.go:28 (0x1393323)
+	Cors.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904de1)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x904dcc)
+	CustomRecoveryWithWriter.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904046)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x904029)
+	LoggerWithConfig.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x903590)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x9031f8)
+	(*Engine).handleHTTPRequest: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x902d31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/zhengwei/go/go1.17.3/src/net/http/server.go:2878 (0x6acffa)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/zhengwei/go/go1.17.3/src/net/http/server.go:3479 (0x6aee04)
+	initALPNRequest.ServeHTTP: h.h.ServeHTTP(rw, req)
+/home/zhengwei/go/go1.17.3/src/net/http/h2_bundle.go:5841 (0x682b37)
+	(*http2serverConn).runHandler: handler(rw, req)
+/home/zhengwei/go/go1.17.3/src/runtime/asm_amd64.s:1581 (0x465560)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2023/04/21 16:52:23 [Recovery] 2023/04/21 - 16:52:23 panic recovered:
+GET /workload/pods?namespace=default HTTP/2.0
+Host: 192.168.10.168:9090
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,zh-TW;q=0.8
+Cache-Control: no-cache
+Origin: https://192.168.10.168:9528
+Pragma: no-cache
+Referer: https://192.168.10.168:9528/
+Sec-Ch-Ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-site
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjEsIlVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE2ODI1NTY0ODUsImlhdCI6MTY4MTk1MTY4NSwiaXNzIjoiYWRtaW4iLCJzdWIiOiJ0b2tlbiJ9.zIUeRWYfOUGvaRmRzpP8l54U_N16aBt3leYLKplvtk0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+/home/zhengwei/go/go1.17.3/src/runtime/panic.go:221 (0x44ace6)
+	panicmem: panic(memoryError)
+/home/zhengwei/go/go1.17.3/src/runtime/signal_unix.go:735 (0x44acb6)
+	sigpanic: panicmem()
+/home/zhengwei/goprojects/backend/Controllers/k8s/workload/pod/pod.go:31 (0x138845f)
+	GetPodsInfo: pods, err := client.CoreV1().Pods(ns).List(opts)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x139372f)
+	(*Context).Next: c.handlers[c.index](c)
+/home/zhengwei/goprojects/backend/Middlewares/jwt.go:37 (0x13935f7)
+	AuthMiddleware.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904046)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x904029)
+	LoggerWithConfig.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x1393337)
+	(*Context).Next: c.handlers[c.index](c)
+/home/zhengwei/goprojects/backend/Middlewares/cors.go:28 (0x1393323)
+	Cors.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904de1)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x904dcc)
+	CustomRecoveryWithWriter.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904046)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x904029)
+	LoggerWithConfig.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x903590)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x9031f8)
+	(*Engine).handleHTTPRequest: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x902d31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/zhengwei/go/go1.17.3/src/net/http/server.go:2878 (0x6acffa)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/zhengwei/go/go1.17.3/src/net/http/server.go:3479 (0x6aee04)
+	initALPNRequest.ServeHTTP: h.h.ServeHTTP(rw, req)
+/home/zhengwei/go/go1.17.3/src/net/http/h2_bundle.go:5841 (0x682b37)
+	(*http2serverConn).runHandler: handler(rw, req)
+/home/zhengwei/go/go1.17.3/src/runtime/asm_amd64.s:1581 (0x465560)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2023/04/21 16:52:23 [Recovery] 2023/04/21 - 16:52:23 panic recovered:
+GET /cluster/namespaces HTTP/2.0
+Host: 192.168.10.168:9090
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,zh-TW;q=0.8
+Cache-Control: no-cache
+Origin: https://192.168.10.168:9528
+Pragma: no-cache
+Referer: https://192.168.10.168:9528/
+Sec-Ch-Ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-site
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjEsIlVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE2ODI1NTY0ODUsImlhdCI6MTY4MTk1MTY4NSwiaXNzIjoiYWRtaW4iLCJzdWIiOiJ0b2tlbiJ9.zIUeRWYfOUGvaRmRzpP8l54U_N16aBt3leYLKplvtk0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+/home/zhengwei/go/go1.17.3/src/runtime/panic.go:221 (0x44ace6)
+	panicmem: panic(memoryError)
+/home/zhengwei/go/go1.17.3/src/runtime/signal_unix.go:735 (0x44acb6)
+	sigpanic: panicmem()
+/home/zhengwei/goprojects/backend/Controllers/k8s/namespace/namespace.go:18 (0x1353413)
+	GetNamespacesInfo: namespaces, err := client.CoreV1().Namespaces().List(opts)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x139372f)
+	(*Context).Next: c.handlers[c.index](c)
+/home/zhengwei/goprojects/backend/Middlewares/jwt.go:37 (0x13935f7)
+	AuthMiddleware.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904046)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x904029)
+	LoggerWithConfig.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x1393337)
+	(*Context).Next: c.handlers[c.index](c)
+/home/zhengwei/goprojects/backend/Middlewares/cors.go:28 (0x1393323)
+	Cors.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904de1)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x904dcc)
+	CustomRecoveryWithWriter.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904046)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x904029)
+	LoggerWithConfig.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x903590)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x9031f8)
+	(*Engine).handleHTTPRequest: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x902d31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/zhengwei/go/go1.17.3/src/net/http/server.go:2878 (0x6acffa)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/zhengwei/go/go1.17.3/src/net/http/server.go:3479 (0x6aee04)
+	initALPNRequest.ServeHTTP: h.h.ServeHTTP(rw, req)
+/home/zhengwei/go/go1.17.3/src/net/http/h2_bundle.go:5841 (0x682b37)
+	(*http2serverConn).runHandler: handler(rw, req)
+/home/zhengwei/go/go1.17.3/src/runtime/asm_amd64.s:1581 (0x465560)
+	goexit: BYTE	$0x90	// NOP
+[0m
+
+
+[31m2023/04/21 16:56:57 [Recovery] 2023/04/21 - 16:56:57 panic recovered:
+GET /other/events?namespace=default HTTP/2.0
+Host: 192.168.10.168:9090
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,zh-TW;q=0.8
+Cache-Control: no-cache
+Origin: https://192.168.10.168:9528
+Pragma: no-cache
+Referer: https://192.168.10.168:9528/
+Sec-Ch-Ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-site
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjEsIlVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE2ODI1NTY0ODUsImlhdCI6MTY4MTk1MTY4NSwiaXNzIjoiYWRtaW4iLCJzdWIiOiJ0b2tlbiJ9.zIUeRWYfOUGvaRmRzpP8l54U_N16aBt3leYLKplvtk0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+/home/zhengwei/go/go1.17.3/src/runtime/panic.go:221 (0x44ace6)
+	panicmem: panic(memoryError)
+/home/zhengwei/go/go1.17.3/src/runtime/signal_unix.go:735 (0x44acb6)
+	sigpanic: panicmem()
+/home/zhengwei/goprojects/backend/Controllers/k8s/other/event/event.go:27 (0x1355dff)
+	GetEventsInfo: events, err := client.CoreV1().Events(ns).List(opts)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x139372f)
+	(*Context).Next: c.handlers[c.index](c)
+/home/zhengwei/goprojects/backend/Middlewares/jwt.go:37 (0x13935f7)
+	AuthMiddleware.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904046)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x904029)
+	LoggerWithConfig.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x1393337)
+	(*Context).Next: c.handlers[c.index](c)
+/home/zhengwei/goprojects/backend/Middlewares/cors.go:28 (0x1393323)
+	Cors.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904de1)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/recovery.go:99 (0x904dcc)
+	CustomRecoveryWithWriter.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x904046)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/logger.go:241 (0x904029)
+	LoggerWithConfig.func1: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168 (0x903590)
+	(*Context).Next: c.handlers[c.index](c)
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:555 (0x9031f8)
+	(*Engine).handleHTTPRequest: c.Next()
+/root/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/gin.go:511 (0x902d31)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/home/zhengwei/go/go1.17.3/src/net/http/server.go:2878 (0x6acffa)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/home/zhengwei/go/go1.17.3/src/net/http/server.go:3479 (0x6aee04)
+	initALPNRequest.ServeHTTP: h.h.ServeHTTP(rw, req)
+/home/zhengwei/go/go1.17.3/src/net/http/h2_bundle.go:5841 (0x682b37)
+	(*http2serverConn).runHandler: handler(rw, req)
+/home/zhengwei/go/go1.17.3/src/runtime/asm_amd64.s:1581 (0x465560)
+	goexit: BYTE	$0x90	// NOP
+[0m

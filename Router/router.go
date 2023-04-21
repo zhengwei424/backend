@@ -132,8 +132,12 @@ func InitRouter() {
 		other.POST("/resourcesCreate", myResourcesCreate.ResourcesCreate)
 		// 新建资源模板文件
 		other.GET("/template", myTemplate.GetResourceTemplate)
-		// 事件信息
+		// event Info
 		other.GET("/events", myEvent.GetEventsInfo)
+		// event CRUD
+		other.POST("/event/delete", myEvent.DeleteEvent)
+		other.POST("/event/update", myEvent.UpdateEvent)
+		other.GET("/event/get", myEvent.GetEvent)
 	}
 
 	// 设置rbac资源路由组
@@ -188,9 +192,9 @@ func InitRouter() {
 		// storageClass Info
 		storage.GET("/storageClasses", myStorageClass.GetStorageClassesInfo)
 		// storageClass CRUD
-		storage.POST("/storageClass/delete", myStorageClass.DeletePersistentVolume)
-		storage.POST("/storageClass/update", myStorageClass.UpdatePersistentVolume)
-		storage.GET("/storageClass/get", myStorageClass.GetPersistentVolume)
+		storage.POST("/storageClass/delete", myStorageClass.DeleteStorageClass)
+		storage.POST("/storageClass/update", myStorageClass.UpdateStorageClass)
+		storage.GET("/storageClass/get", myStorageClass.GetStorageClass)
 	}
 	// 设置svc资源路由组
 	svc := r.Group("svc")
