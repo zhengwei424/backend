@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreatePod(c *gin.Context) {
-	podInfo := new(v1.Pod)
-	if err := c.BindJSON(podInfo); err == nil {
-		fmt.Println(podInfo.Status)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.CoreV1().Pods(podInfo.Namespace).Create(podInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": podInfo,
-		"msg": "ok",
-	})
-}
-
 func GetPod(c *gin.Context) {
 	ns := c.Query("namespace")
 	pod := c.Query("pod")

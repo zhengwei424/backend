@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreateSecret(c *gin.Context) {
-	secretInfo := new(v1.Secret)
-	if err := c.BindJSON(secretInfo); err == nil {
-		fmt.Println(secretInfo)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.CoreV1().Secrets(secretInfo.Namespace).Create(secretInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": secretInfo,
-		"msg": "ok",
-	})
-}
-
 func GetSecret(c *gin.Context) {
 	ns := c.Query("namespace")
 	secret := c.Query("secret")

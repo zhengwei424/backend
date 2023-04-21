@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreateRoleBinding(c *gin.Context) {
-	roleBindingInfo := new(v1.RoleBinding)
-	if err := c.BindJSON(roleBindingInfo); err == nil {
-		fmt.Println(roleBindingInfo)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.RbacV1().RoleBindings(roleBindingInfo.Namespace).Create(roleBindingInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": roleBindingInfo,
-		"msg": "ok",
-	})
-}
-
 func GetRoleBinding(c *gin.Context) {
 	ns := c.Query("namespace")
 	roleBinding := c.Query("roleBinding")

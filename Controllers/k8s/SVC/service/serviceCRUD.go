@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreateService(c *gin.Context) {
-	serviceInfo := new(v1.Service)
-	if err := c.BindJSON(serviceInfo); err == nil {
-		fmt.Println(serviceInfo.Status)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.CoreV1().Services(serviceInfo.Namespace).Create(serviceInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": serviceInfo,
-		"msg": "ok",
-	})
-}
-
 func GetService(c *gin.Context) {
 	ns := c.Query("namespace")
 	service := c.Query("service")

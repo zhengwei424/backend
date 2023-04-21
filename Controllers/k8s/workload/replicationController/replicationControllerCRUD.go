@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreateReplicationController(c *gin.Context) {
-	replicationControllerInfo := new(v1.ReplicationController)
-	if err := c.BindJSON(replicationControllerInfo); err == nil {
-		fmt.Println(replicationControllerInfo.Status)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.CoreV1().ReplicationControllers(replicationControllerInfo.Namespace).Create(replicationControllerInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": replicationControllerInfo,
-		"msg": "ok",
-	})
-}
-
 func GetReplicationController(c *gin.Context) {
 	ns := c.Query("namespace")
 	replicationController := c.Query("replicationController")

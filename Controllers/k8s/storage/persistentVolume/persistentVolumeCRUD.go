@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreatePersistentVolume(c *gin.Context) {
-	persistentVolumeInfo := new(v1.PersistentVolume)
-	if err := c.BindJSON(persistentVolumeInfo); err == nil {
-		fmt.Println(persistentVolumeInfo.Status)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.CoreV1().PersistentVolumes().Create(persistentVolumeInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": persistentVolumeInfo,
-		"msg": "ok",
-	})
-}
-
 func GetPersistentVolume(c *gin.Context) {
 	persistentVolume := c.Query("persistentVolume")
 	persistentVolumeInfo := new(v1.PersistentVolume)

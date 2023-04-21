@@ -9,23 +9,6 @@ import (
 	"net/http"
 )
 
-func CreateNamespace(c *gin.Context) {
-	client := globalConfig.MyClient.Client
-	namespaceInfo := new(v1.Namespace)
-	if err := c.BindJSON(namespaceInfo); err == nil {
-		fmt.Println(namespaceInfo)
-	}
-	_, err := client.CoreV1().Namespaces().Create(namespaceInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": namespaceInfo,
-		"msg": "ok",
-	})
-}
-
 func GetNamespace(c *gin.Context) {
 	namespace := c.Query("namespace")
 	namespaceInfo := new(v1.Namespace)

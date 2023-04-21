@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreateConfigMap(c *gin.Context) {
-	configMapInfo := new(v1.ConfigMap)
-	if err := c.BindJSON(configMapInfo); err == nil {
-		fmt.Println(configMapInfo)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.CoreV1().ConfigMaps(configMapInfo.Namespace).Create(configMapInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": configMapInfo,
-		"msg": "ok",
-	})
-}
-
 func GetConfigMap(c *gin.Context) {
 	ns := c.Query("namespace")
 	configMap := c.Query("configMap")

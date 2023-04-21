@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreateNode(c *gin.Context) {
-	nodeInfo := new(v1.Node)
-	if err := c.BindJSON(nodeInfo); err == nil {
-		fmt.Println(nodeInfo)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.CoreV1().Nodes().Create(nodeInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": nodeInfo,
-		"msg": "ok",
-	})
-}
-
 func GetNode(c *gin.Context) {
 	node := c.Query("node")
 

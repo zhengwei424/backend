@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreatePersistentVolumeClaim(c *gin.Context) {
-	persistentVolumeClaimInfo := new(v1.PersistentVolumeClaim)
-	if err := c.BindJSON(persistentVolumeClaimInfo); err == nil {
-		fmt.Println(persistentVolumeClaimInfo.Status)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.CoreV1().PersistentVolumeClaims(persistentVolumeClaimInfo.Namespace).Create(persistentVolumeClaimInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": persistentVolumeClaimInfo,
-		"msg": "ok",
-	})
-}
-
 func GetPersistentVolumeClaim(c *gin.Context) {
 	ns := c.Query("namespace")
 	persistentVolumeClaim := c.Query("persistentVolumeClaim")

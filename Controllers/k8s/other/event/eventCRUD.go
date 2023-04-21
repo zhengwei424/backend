@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreateEvent(c *gin.Context) {
-	eventInfo := new(v1.Event)
-	if err := c.BindJSON(eventInfo); err == nil {
-		fmt.Println(eventInfo)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.CoreV1().Events(eventInfo.Namespace).Create(eventInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": eventInfo,
-		"msg": "ok",
-	})
-}
-
 func GetEvent(c *gin.Context) {
 	ns := c.Query("namespace")
 	event := c.Query("event")

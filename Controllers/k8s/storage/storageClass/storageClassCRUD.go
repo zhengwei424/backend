@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreatePersistentVolume(c *gin.Context) {
-	storageClassInfo := new(v1.StorageClass)
-	if err := c.BindJSON(storageClassInfo); err == nil {
-		fmt.Println(storageClassInfo)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.StorageV1().StorageClasses().Create(storageClassInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": storageClassInfo,
-		"msg": "ok",
-	})
-}
-
 func GetPersistentVolume(c *gin.Context) {
 	storageClass := c.Query("storageClass")
 	storageClassInfo := new(v1.StorageClass)

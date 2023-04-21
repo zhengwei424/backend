@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreateServiceAccount(c *gin.Context) {
-	serviceAccountInfo := new(v1.ServiceAccount)
-	if err := c.BindJSON(serviceAccountInfo); err == nil {
-		fmt.Println(serviceAccountInfo)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.CoreV1().ServiceAccounts(serviceAccountInfo.Namespace).Create(serviceAccountInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": serviceAccountInfo,
-		"msg": "ok",
-	})
-}
-
 func GetServiceAccount(c *gin.Context) {
 	ns := c.Query("namespace")
 	serviceAccount := c.Query("serviceAccount")

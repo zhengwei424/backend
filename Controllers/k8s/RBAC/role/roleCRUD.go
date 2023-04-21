@@ -9,24 +9,6 @@ import (
 	"net/http"
 )
 
-func CreateRole(c *gin.Context) {
-	roleInfo := new(v1.Role)
-	if err := c.BindJSON(roleInfo); err == nil {
-		fmt.Println(roleInfo)
-	}
-
-	client := globalConfig.MyClient.Client
-	_, err := client.RbacV1().Roles(roleInfo.Namespace).Create(roleInfo)
-	if err != nil {
-		panic(err)
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		//"data": roleInfo,
-		"msg": "ok",
-	})
-}
-
 func GetRole(c *gin.Context) {
 	ns := c.Query("namespace")
 	role := c.Query("role")
