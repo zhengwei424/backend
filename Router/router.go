@@ -102,6 +102,10 @@ func InitRouter() {
 		cluster.GET("/namespace/get", myNamespace.GetNamespace)
 		// node Info
 		cluster.GET("/nodes", myNode.GetNodesInfo)
+		// node CRUD
+		cluster.POST("/node/delete", myNode.DeleteNode)
+		cluster.POST("/node/update", myNode.UpdateNode)
+		cluster.GET("/node/get", myNode.GetNode)
 	}
 
 	// 设置config资源路由组
