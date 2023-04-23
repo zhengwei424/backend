@@ -34,6 +34,9 @@ func GetDaemonSetsInfo(c *gin.Context) {
 		daemonSetInfo["name"] = daemonSet.Name
 		daemonSetInfo["namespace"] = daemonSet.Namespace
 		daemonSetInfo["labels"] = daemonSet.Labels
+		daemonSetInfo["nodeSelector"] = daemonSet.Spec.Template.Spec.NodeSelector
+		daemonSetInfo["desire"] = daemonSet.Status.DesiredNumberScheduled
+		daemonSetInfo["available"] = daemonSet.Status.NumberAvailable
 		daemonSetInfo["creationTimestamp"] = tools.DeltaTime(daemonSet.CreationTimestamp.UTC(), time.Now())
 		daemonSetsInfo = append(daemonSetsInfo, daemonSetInfo)
 	}

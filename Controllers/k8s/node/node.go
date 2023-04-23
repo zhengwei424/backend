@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"k8s.io/apimachinery/pkg/apis/meta/v1"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -22,14 +23,22 @@ func GetNodesInfo(c *gin.Context) {
 	}
 	for _, node := range nodes.Items {
 		var nodeInfo = make(map[string]interface{}, 0)
+		var roles []string
 		nodeInfo["name"] = node.Name
 		nodeInfo["labels"] = node.Labels
+		for k, v := range node.Labels {
+			role := ""
+			if strings.Contains(k, "node-role.kubernetes.io") && v == "true" {
+				role = strings.Split(k, "/")[1]
+				roles = append(roles, role)
+			}
+		}
+		nodeInfo["roles"] = strings.Join(roles, ",")
 		nodeInfo["Annotations"] = node.Annotations
 		nodeInfo["creationTimestamp"] = tools.DeltaTime(node.CreationTimestamp.UTC(), time.Now())
 		nodeInfo["taints"] = node.Spec.Taints
 		nodeInfo["address"] = map[string]string{"InternalIP": "", "Hostname": ""}
 		for _, v := range node.Status.Addresses {
-			fmt.Printf("%v", v)
 			if v.Type == "InternalIP" {
 				// interface需要断言自己需要的类型
 				nodeInfo["address"].(map[string]string)["InternalIP"] = v.Address
@@ -49,7 +58,15 @@ func GetNodesInfo(c *gin.Context) {
 		//nodeInfo["allocatable_mem"] = node.Status.Allocatable.Memory().Value()
 		//nodeInfo["capacity_cpu"] = node.Status.Capacity.Cpu().Value()
 		//nodeInfo["capacity_mem"] = node.Status.Capacity.Memory().Value()
-		nodeInfo["conditions"] = node.Status.Conditions
+		for _, v := range node.Status.Conditions {
+			if v.Type == "Ready" {
+				if v.Status == "True" {
+					nodeInfo["ready"] = "Ready"
+				} else {
+					nodeInfo["ready"] = "NotReady"
+				}
+			}
+		}
 		nodesInfo = append(nodesInfo, nodeInfo)
 	}
 	c.JSON(http.StatusOK, gin.H{
