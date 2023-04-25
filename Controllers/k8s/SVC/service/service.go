@@ -34,6 +34,26 @@ func GetServicesInfo(c *gin.Context) {
 		serviceInfo["name"] = service.Name
 		serviceInfo["namespace"] = service.Namespace
 		serviceInfo["labels"] = service.Labels
+		serviceInfo["type"] = service.Spec.Type
+		serviceInfo["clusterIP"] = service.Spec.ClusterIP
+		ports := make([]string, 0)
+		for _, item := range service.Spec.Ports {
+			var port string
+			if item.NodePort != 0 {
+				port = fmt.Sprintf("%d:%d/%s", item.Port, item.NodePort, item.Protocol)
+			} else {
+				if item.Port == item.TargetPort.IntVal {
+					port = fmt.Sprintf("%d/%s", item.Port, item.Protocol)
+				} else {
+					port = fmt.Sprintf("%d:%d/%s", item.Port, item.TargetPort.IntVal, item.Protocol)
+				}
+			}
+			ports = append(ports, port)
+		}
+		serviceInfo["ports"] = ports
+		serviceInfo["externalIP"] = service.Spec.ExternalIPs
+		serviceInfo["status"] = service.Spec.Type != "LoadBalancer" || len(service.Spec.ExternalIPs) > 0
+		serviceInfo["selector"] = service.Spec.Selector
 		serviceInfo["creationTimestamp"] = tools.DeltaTime(service.CreationTimestamp.UTC(), time.Now())
 		servicesInfo = append(servicesInfo, serviceInfo)
 	}

@@ -34,6 +34,27 @@ func GetEndpointsInfo(c *gin.Context) {
 		endpointInfo["name"] = endpoint.Name
 		endpointInfo["namespace"] = endpoint.Namespace
 		endpointInfo["labels"] = endpoint.Labels
+		eps := make([]string, 0)
+		for _, item1 := range endpoint.Subsets {
+			epPorts := make([]string, 0)
+			ep := make([]string, 0)
+			if len(item1.Ports) > 0 {
+				for _, n := range item1.Ports {
+					epPorts = append(epPorts, fmt.Sprintf("%d/%s", n.Port, n.Protocol))
+				}
+			}
+			if len(item1.Addresses) > 0 {
+				if len(epPorts) > 0 {
+					for _, i := range item1.Addresses {
+						for _, j := range epPorts {
+							ep = append(ep, fmt.Sprintf("%s:%s", i.IP, j))
+						}
+					}
+				}
+			}
+			eps = append(eps, ep...)
+		}
+		endpointInfo["endpoints"] = eps
 		endpointInfo["creationTimestamp"] = tools.DeltaTime(endpoint.CreationTimestamp.UTC(), time.Now())
 		endpointsInfo = append(endpointsInfo, endpointInfo)
 	}

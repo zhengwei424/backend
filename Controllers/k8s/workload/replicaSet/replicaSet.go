@@ -34,6 +34,8 @@ func GetReplicaSetsInfo(c *gin.Context) {
 		replicaSetInfo["name"] = replicaSet.Name
 		replicaSetInfo["namespace"] = replicaSet.Namespace
 		replicaSetInfo["labels"] = replicaSet.Labels
+		replicaSetInfo["readyReplicas"] = replicaSet.Status.ReadyReplicas
+		replicaSetInfo["replicas"] = replicaSet.Status.Replicas
 		replicaSetInfo["creationTimestamp"] = tools.DeltaTime(replicaSet.CreationTimestamp.UTC(), time.Now())
 		replicaSetsInfo = append(replicaSetsInfo, replicaSetInfo)
 	}

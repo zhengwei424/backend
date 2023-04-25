@@ -34,6 +34,8 @@ func GetReplicationControllersInfo(c *gin.Context) {
 		replicationControllerInfo["name"] = replicationController.Name
 		replicationControllerInfo["namespace"] = replicationController.Namespace
 		replicationControllerInfo["labels"] = replicationController.Labels
+		replicationControllerInfo["readyReplicas"] = replicationController.Status.ReadyReplicas
+		replicationControllerInfo["replicas"] = replicationController.Status.Replicas
 		replicationControllerInfo["creationTimestamp"] = tools.DeltaTime(replicationController.CreationTimestamp.UTC(), time.Now())
 		replicationControllersInfo = append(replicationControllersInfo, replicationControllerInfo)
 	}

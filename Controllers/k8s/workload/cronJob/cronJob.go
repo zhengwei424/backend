@@ -34,6 +34,10 @@ func GetCronJobsInfo(c *gin.Context) {
 		cronJobInfo["name"] = cronJob.Name
 		cronJobInfo["namespace"] = cronJob.Namespace
 		cronJobInfo["labels"] = cronJob.Labels
+		cronJobInfo["schedule"] = cronJob.Spec.Schedule
+		cronJobInfo["suspend"] = fmt.Sprintf("%t", *(cronJob.Spec.Suspend))
+		cronJobInfo["active"] = len(cronJob.Status.Active)
+		cronJobInfo["lastSchedule"] = tools.DeltaTime(cronJob.Status.LastScheduleTime.UTC(), time.Now())
 		cronJobInfo["creationTimestamp"] = tools.DeltaTime(cronJob.CreationTimestamp.UTC(), time.Now())
 		cronJobsInfo = append(cronJobsInfo, cronJobInfo)
 	}

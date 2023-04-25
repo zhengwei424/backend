@@ -34,6 +34,8 @@ func GetDeploymentsInfo(c *gin.Context) {
 		deploymentInfo["name"] = deployment.Name
 		deploymentInfo["namespace"] = deployment.Namespace
 		deploymentInfo["labels"] = deployment.Labels
+		deploymentInfo["readyReplicas"] = deployment.Status.ReadyReplicas
+		deploymentInfo["replicas"] = deployment.Status.Replicas
 		deploymentInfo["creationTimestamp"] = tools.DeltaTime(deployment.CreationTimestamp.UTC(), time.Now())
 		deploymentsInfo = append(deploymentsInfo, deploymentInfo)
 	}

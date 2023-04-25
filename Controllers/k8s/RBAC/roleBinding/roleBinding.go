@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -34,8 +35,11 @@ func GetRoleBindingsInfo(c *gin.Context) {
 		roleBindingInfo["name"] = roleBinding.Name
 		roleBindingInfo["namespace"] = roleBinding.Namespace
 		roleBindingInfo["labels"] = roleBinding.Labels
-		roleBindingInfo["roleRef"] = roleBinding.RoleRef
-		roleBindingInfo["subjects"] = roleBinding.Subjects
+		bindings := make([]string, 0)
+		for _, v := range roleBinding.Subjects {
+			bindings = append(bindings, v.Name)
+		}
+		roleBindingInfo["bindings"] = strings.Join(bindings, ",")
 		roleBindingInfo["creationTimestamp"] = tools.DeltaTime(roleBinding.CreationTimestamp.UTC(), time.Now())
 		roleBindingsInfo = append(roleBindingsInfo, roleBindingInfo)
 	}

@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -24,8 +25,11 @@ func GetClusterRoleBindingsInfo(c *gin.Context) {
 		var clusterRoleBindingInfo = make(map[string]interface{}, 0)
 		clusterRoleBindingInfo["name"] = clusterRoleBinding.Name
 		clusterRoleBindingInfo["labels"] = clusterRoleBinding.Labels
-		clusterRoleBindingInfo["roleRef"] = clusterRoleBinding.RoleRef
-		clusterRoleBindingInfo["subjects"] = clusterRoleBinding.Subjects
+		bindings := make([]string, 0)
+		for _, v := range clusterRoleBinding.Subjects {
+			bindings = append(bindings, v.Name)
+		}
+		clusterRoleBindingInfo["bindings"] = strings.Join(bindings, ",")
 		clusterRoleBindingInfo["creationTimestamp"] = tools.DeltaTime(clusterRoleBinding.CreationTimestamp.UTC(), time.Now())
 		clusterRoleBindingsInfo = append(clusterRoleBindingsInfo, clusterRoleBindingInfo)
 	}

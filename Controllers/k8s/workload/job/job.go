@@ -34,6 +34,17 @@ func GetJobsInfo(c *gin.Context) {
 		jobInfo["name"] = job.Name
 		jobInfo["namespace"] = job.Namespace
 		jobInfo["labels"] = job.Labels
+		jobInfo["completions"] = job.Status.Succeeded
+		jobInfo["desiredCompletions"] = *(job.Spec.Completions)
+		for _, v := range job.Status.Conditions {
+			if v.Type == "Complete" {
+				if v.Status == "True" {
+					jobInfo["conditions"] = "Complete"
+				} else {
+					jobInfo["conditions"] = "NotComplete"
+				}
+			}
+		}
 		jobInfo["creationTimestamp"] = tools.DeltaTime(job.CreationTimestamp.UTC(), time.Now())
 		jobsInfo = append(jobsInfo, jobInfo)
 	}

@@ -34,6 +34,8 @@ func GetStatefulSetsInfo(c *gin.Context) {
 		statefulSetInfo["name"] = statefulSet.Name
 		statefulSetInfo["namespace"] = statefulSet.Namespace
 		statefulSetInfo["labels"] = statefulSet.Labels
+		statefulSetInfo["readyReplicas"] = statefulSet.Status.ReadyReplicas
+		statefulSetInfo["replicas"] = statefulSet.Status.Replicas
 		statefulSetInfo["creationTimestamp"] = tools.DeltaTime(statefulSet.CreationTimestamp.UTC(), time.Now())
 		statefulSetsInfo = append(statefulSetsInfo, statefulSetInfo)
 	}
