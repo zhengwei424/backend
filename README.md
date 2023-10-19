@@ -1,5 +1,5 @@
 # 前端
-https://github.com/zhengwei424/fronted
+https://github.com/zhengwei424/frontend
 
 # 后端
 https://github.com/zhengwei424/backend
